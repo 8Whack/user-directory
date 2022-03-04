@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import data from '../data'
 
 
-let currIndex = 1
+let currIndex = 0
 function Info() {
     
     const [firstName, setFirstName] = useState(data[0].name.first);
@@ -25,7 +25,6 @@ function Info() {
         setTitle(data[currIndex].title);
         setEmployer(data[currIndex].employer);
         setMovies(data[currIndex].favoriteMovies)
-        console.log(movies)
         
     }
 
@@ -43,6 +42,18 @@ function Info() {
         setMovies(data[currIndex].favoriteMovies)
         
     }
+    
+    function deleteCard() {
+        
+        data.splice(currIndex, 1)
+        console.log(data)
+        setFirstName(data[currIndex].name.first);
+        setLastName(data[currIndex].name.last);
+        setFrom(data[currIndex].city + ', '+ data[currIndex].country);
+        setTitle(data[currIndex].title);
+        setEmployer(data[currIndex].employer);
+        setMovies(data[currIndex].favoriteMovies)
+    }
 
   return (
     <div style={{backgroundColor: 'white'}}>
@@ -57,6 +68,11 @@ function Info() {
             <li>{movies[2]}</li>
         </ol>
         <button onClick={()=>previous()}> &lt; Previous </button>
+        <div>
+            <button className='blue'>Edit</button>
+            <button className='blue' onClick={()=>deleteCard()}>Delete</button>
+            <button className='blue'>New</button>
+        </div>
         <button onClick={()=>next()}>Next &gt;</button>
     </div>
   )
