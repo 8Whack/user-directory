@@ -59,13 +59,13 @@ function Info() {
     }
 
   return (
-    <div style={{backgroundColor: 'white'}}  >
+    <div style={{backgroundColor: 'white'}} className='infoBody' >
         <div className='count'>
             <h1><b>{currIndex+1}/{data.length}</b></h1>
         </div>
         
         <div className='info'>
-        <h1>{firstName+ ' '+ lastName}</h1>
+        <h1 className='name'>{firstName+ ' '+ lastName}</h1>
         <p><b>From:</b> {from}</p>
         <p><b>Job Title:</b> {title}</p>
         <p><b>Employer:</b> {employer}</p>
@@ -81,7 +81,7 @@ function Info() {
         <div className='create'>
             <button className='blue'>Edit</button>
             <button className='blue' onClick={()=>deleteCard()}>Delete</button>
-            <button className='blue' onClick={()=> setNewDisplay(true)}>New</button>
+            <button className='blue' onClick={()=> setNewDisplay(!newDisplay)}>New</button>
             
         </div>
         <button onClick={()=>next()}><b>Next &gt;</b></button>
