@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import data from '../data'
+import New from './New';
+import NewFormik from './NewFormik';
 
 
 let currIndex = 0
@@ -11,13 +13,14 @@ function Info() {
     const [title, setTitle] = useState(data[0].title);
     const [employer, setEmployer] = useState(data[0].employer);
     const [movies, setMovies] = useState(data[0].favoriteMovies);
+    const [newDisplay, setNewDisplay] = useState(false)
 
     function next() {
         
-        if(currIndex < 23){
+        if(currIndex < data.length){
             currIndex++;
         }else{
-            currIndex = 24;
+            currIndex = data.length;
         };
         setFirstName(data[currIndex].name.first);
         setLastName(data[currIndex].name.last);
@@ -56,7 +59,12 @@ function Info() {
     }
 
   return (
-    <div style={{backgroundColor: 'white'}}>
+    <div style={{backgroundColor: 'white'}}  >
+        <div className='count'>
+            <h1><b>{currIndex+1}/{data.length}</b></h1>
+        </div>
+        
+        <div className='info'>
         <h1>{firstName+ ' '+ lastName}</h1>
         <p><b>From:</b> {from}</p>
         <p><b>Job Title:</b> {title}</p>
@@ -67,13 +75,19 @@ function Info() {
             <li>{movies[1]}</li>
             <li>{movies[2]}</li>
         </ol>
-        <button onClick={()=>previous()}> &lt; Previous </button>
-        <div>
+        </div>
+        <div className='navigation'>
+        <button onClick={()=>previous()}><b> &lt; Previous </b></button>
+        <div className='create'>
             <button className='blue'>Edit</button>
             <button className='blue' onClick={()=>deleteCard()}>Delete</button>
-            <button className='blue'>New</button>
+            <button className='blue' onClick={()=> setNewDisplay(true)}>New</button>
+            
         </div>
-        <button onClick={()=>next()}>Next &gt;</button>
+        <button onClick={()=>next()}><b>Next &gt;</b></button>
+        </div>
+        
+        {newDisplay && <NewFormik display={setNewDisplay}/>}
     </div>
   )
 }
