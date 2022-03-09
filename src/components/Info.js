@@ -17,19 +17,25 @@ function Info() {
     const [newDisplay, setNewDisplay] = useState(false);
     const [edit, setEdit] = useState(false);
 
-    function next() {
-        
-        if(currIndex < data.length){
-            currIndex++;
-        }else{
-            currIndex = data.length;
-        };
+    function refresh(){
         setFirstName(data[currIndex].name.first);
         setLastName(data[currIndex].name.last);
         setFrom(data[currIndex].city + ', '+ data[currIndex].country);
         setTitle(data[currIndex].title);
         setEmployer(data[currIndex].employer);
         setMovies(data[currIndex].favoriteMovies)
+    }
+
+    function next() {
+        
+        if(currIndex < data.length-1){
+            currIndex++;
+            console.log(currIndex)
+        }else{
+            currIndex = data.length -1
+            console.log(currIndex)
+        };
+        refresh();
         
     }
 
@@ -39,12 +45,7 @@ function Info() {
         }else{
             currIndex = 0;
         };
-        setFirstName(data[currIndex].name.first);
-        setLastName(data[currIndex].name.last);
-        setFrom(data[currIndex].city + ', '+ data[currIndex].country);
-        setTitle(data[currIndex].title);
-        setEmployer(data[currIndex].employer);
-        setMovies(data[currIndex].favoriteMovies)
+        refresh();
         
     }
     
@@ -52,12 +53,7 @@ function Info() {
         
         data.splice(currIndex, 1)
         console.log(data)
-        setFirstName(data[currIndex].name.first);
-        setLastName(data[currIndex].name.last);
-        setFrom(data[currIndex].city + ', '+ data[currIndex].country);
-        setTitle(data[currIndex].title);
-        setEmployer(data[currIndex].employer);
-        setMovies(data[currIndex].favoriteMovies)
+        refresh();
     }
 
   return (
@@ -90,7 +86,7 @@ function Info() {
         </div>
         
         {newDisplay && <NewFormik display={setNewDisplay}/>}
-        {edit ? <Edit display={setEdit} index/> : null}
+        {edit ? <Edit display={setEdit} refresh={refresh}/> : null}
     </div>
   )
 }

@@ -68,7 +68,7 @@ function Edit(props) {
 
         <button type="submit">Search</button>
     </form>
-    {toEdit && <EditFormik index={index} display={props.display}/>}
+    {toEdit && <EditFormik index={index} display={props.display} refresh={props.refresh}/>}
     </div>
   )
 }

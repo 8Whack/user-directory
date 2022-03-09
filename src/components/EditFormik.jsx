@@ -39,8 +39,9 @@ function EditFormik(props) {
             }
 
             data.splice(index, 1, info)
-            formik.handleReset()
-            props.display(false)
+            formik.handleReset();
+            props.display(false);   
+            props.refresh();    
         },
     });
   return (
