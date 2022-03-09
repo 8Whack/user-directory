@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import data from '../data'
+import Edit from './Edit';
 import New from './New';
 import NewFormik from './NewFormik';
 
@@ -13,7 +14,8 @@ function Info() {
     const [title, setTitle] = useState(data[0].title);
     const [employer, setEmployer] = useState(data[0].employer);
     const [movies, setMovies] = useState(data[0].favoriteMovies);
-    const [newDisplay, setNewDisplay] = useState(false)
+    const [newDisplay, setNewDisplay] = useState(false);
+    const [edit, setEdit] = useState(false);
 
     function next() {
         
@@ -79,7 +81,7 @@ function Info() {
         <div className='navigation'>
         <button onClick={()=>previous()}><b> &lt; Previous </b></button>
         <div className='create'>
-            <button className='blue'>Edit</button>
+            <button className='blue' onClick={()=>setEdit(!edit)}>Edit</button>
             <button className='blue' onClick={()=>deleteCard()}>Delete</button>
             <button className='blue' onClick={()=> setNewDisplay(!newDisplay)}>New</button>
             
@@ -88,6 +90,7 @@ function Info() {
         </div>
         
         {newDisplay && <NewFormik display={setNewDisplay}/>}
+        {edit ? <Edit display={setEdit} index/> : null}
     </div>
   )
 }
